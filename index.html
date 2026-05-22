@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync - Interactive Student Dashboard</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-normal">
+    <!-- Screen Reader Live Region for Accessibility Announcements -->
+    <div id="sr-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="app-container">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar" role="complementary" aria-label="Main Navigation">
+            <div class="logo-area">
+                <svg class="logo-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    <path d="M6 6h10"></path>
+                    <path d="M6 10h10"></path>
+                </svg>
+                <span class="logo-text">StudySync</span>
+            </div>
+            
+            <nav class="nav-menu" role="navigation" aria-label="Sidebar links">
+                <ul>
+                    <li>
+                        <button class="nav-btn active" data-target="dashboard" aria-current="page" id="nav-dashboard-btn">
+                            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="9"></rect>
+                                <rect x="14" y="3" width="7" height="5"></rect>
+                                <rect x="14" y="12" width="7" height="9"></rect>
+                                <rect x="3" y="16" width="7" height="5"></rect>
+                            </svg>
+                            <span>Dashboard</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="calendar" id="nav-calendar-btn">
+                            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>Study Calendar</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="groups" id="nav-groups-btn">
+                            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>Study Groups</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="settings" id="nav-settings-btn">
+                            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            <span>Settings</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="user-profile-widget">
+                <div class="user-avatar-container">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%232563EB'/><path d='M50 30a15 15 0 1 0 0 30 15 15 0 1 0 0-30zm0 35c-20 0-35 12-35 25h70c0-13-15-25-35-25z' fill='white'/></svg>" alt="User Profile Image" class="user-avatar-img">
+                    <span class="online-indicator"></span>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Siyabonga</span>
+                    <span class="user-role">IT Student</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-content" role="main" id="main-content">
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <div class="search-box" role="search">
+                    <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="global-search" placeholder="Search courses, notes..." aria-label="Search study materials">
+                </div>
+                
+                <div class="topbar-actions">
+                    <button class="notification-btn" aria-label="View 3 notifications">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <button class="add-session-btn" id="header-add-session-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>Add Study Session</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- VIEW 1: DASHBOARD -->
+            <div id="dashboard-view" class="view-panel active">
+                <div class="dashboard-grid">
+                    <!-- Welcome Hero Banner -->
+                    <div class="welcome-banner">
+                        <div class="welcome-content">
+                            <h1>Welcome back, Siyabonga!</h1>
+                            <p>You're making great progress this week. Stay focused!</p>
+                            
+                            <div class="weekly-goal-container">
+                                <div class="goal-header">
+                                    <span>Weekly Study Goal</span>
+                                    <span class="goal-percentage" id="goal-progress-text">80%</span>
+                                </div>
+                                <div class="goal-bar-bg" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" id="goal-progressbar">
+                                    <div class="goal-bar-fill" style="width: 80%;"></div>
+                                </div>
+                                <span class="goal-footer-text">Almost there! 20% more to hit your weekly target.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Deadline Card -->
+                    <div class="dashboard-card deadline-card">
+                        <div class="card-header">
+                            <h2>Upcoming Deadline</h2>
+                            <svg class="calendar-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="deadline-content">
+                            <div class="deadline-badge">CRITICAL</div>
+                            <h3>HCIN6222 POE</h3>
+                            <p class="deadline-time">Due in <span class="days-left highlight-red">3 days</span></p>
+                        </div>
+                        <a href="#" class="view-all-link" id="view-all-deadlines">View all deadlines &rarr;</a>
+                    </div>
+
+                    <!-- Today's Tasks Section -->
+                    <div class="dashboard-card tasks-card">
+                        <div class="card-header">
+                            <h2>Today's Tasks</h2>
+                            <button class="manage-tasks-btn">Manage</button>
+                        </div>
+                        <div class="tasks-list" id="tasks-container">
+                            <!-- Tasks will be rendered dynamically by JavaScript -->
+                        </div>
+                        <button class="add-new-task-dotted" id="dashboard-add-task-btn">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                            </svg>
+                            <span>Add new task</span>
+                        </button>
+                    </div>
+
+                    <!-- Recommended Groups Section -->
+                    <div class="dashboard-card recommended-groups-card">
+                        <div class="card-header">
+                            <h2>Recommended Groups</h2>
+                            <button class="see-all-groups-btn" id="see-all-groups-dashboard">See all</button>
+                        </div>
+                        <div class="groups-recommendations-list">
+                            <div class="rec-group-item" data-group="java">
+                                <div class="rec-group-icon color-orange">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="16 18 22 12 16 6"></polyline>
+                                        <polyline points="8 6 2 12 8 18"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="rec-group-info">
+                                    <h4>Java 2026</h4>
+                                    <p>12 Active Members</p>
+                                </div>
+                                <div class="avatar-stack">
+                                    <span class="avatar-mini bg-blue">S</span>
+                                    <span class="avatar-mini bg-green">T</span>
+                                    <span class="avatar-mini bg-purple">K</span>
+                                    <span class="avatar-plus">+9</span>
+                                </div>
+                                <button class="chevron-btn-arrow" aria-label="Open Java 2026 group details">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="rec-group-item" data-group="ba">
+                                <div class="rec-group-icon color-purple">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3v18h18"></path>
+                                        <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                                    </svg>
+                                </div>
+                                <div class="rec-group-info">
+                                    <h4>BA Exam Prep Room</h4>
+                                    <p>8 Active Members</p>
+                                </div>
+                                <div class="avatar-stack">
+                                    <span class="avatar-mini bg-orange">A</span>
+                                    <span class="avatar-mini bg-pink">B</span>
+                                    <span class="avatar-mini bg-blue">Z</span>
+                                    <span class="avatar-plus">+5</span>
+                                </div>
+                                <button class="chevron-btn-arrow" aria-label="Open BA Exam Prep Room group details">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Strip -->
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper color-blue">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-values">
+                                <span class="stat-label">Study Time</span>
+                                <span class="stat-number">24.5h</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper color-green">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-values">
+                                <span class="stat-label">Tasks Completed</span>
+                                <span class="stat-number" id="stats-tasks-completed">12</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper color-orange">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-values">
+                                <span class="stat-label">Streak</span>
+                                <span class="stat-number">8 Days</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper color-purple">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="stat-values">
+                                <span class="stat-label">Rank</span>
+                                <span class="stat-number">Top 5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 2: STUDY CALENDAR -->
+            <div id="calendar-view" class="view-panel">
+                <div class="calendar-header-bar">
+                    <div class="calendar-title-area">
+                        <h1>Study Calendar</h1>
+                        <p>Organize your study sessions and stay on track</p>
+                    </div>
+                    <div class="calendar-controls">
+                        <div class="time-tabs" role="tablist" aria-label="Calendar Range Selection">
+                            <button class="tab-btn" role="tab" aria-selected="false">Day</button>
+                            <button class="tab-btn active" role="tab" aria-selected="true">Week</button>
+                            <button class="tab-btn" role="tab" aria-selected="false">Month</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calendar-grid-container">
+                    <div class="calendar-grid-wrapper">
+                        <!-- Calendar Header Days -->
+                        <div class="calendar-header-row">
+                            <div class="time-label-col">TIME</div>
+                            <div class="day-col">Mon <span class="day-num">12</span></div>
+                            <div class="day-col">Tue <span class="day-num">13</span></div>
+                            <div class="day-col">Wed <span class="day-num">14</span></div>
+                            <div class="day-col">Thu <span class="day-num">15</span></div>
+                            <div class="day-col">Fri <span class="day-num">16</span></div>
+                        </div>
+
+                        <!-- Calendar Grid Body -->
+                        <div class="calendar-body-grid" id="calendar-grid">
+                            <!-- Hours and grid slots will be populated via app.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar Bottom Banner -->
+                <div class="calendar-bottom-info">
+                    <div class="exam-status-card">
+                        <div class="exam-info">
+                            <span class="exam-alert-label">Upcoming Exam</span>
+                            <h3>Algorithms & Data Structures</h3>
+                            <div class="prep-bar-container">
+                                <div class="prep-progress-bg">
+                                    <div class="prep-progress-fill" style="width: 75%;"></div>
+                                </div>
+                                <span class="prep-percentage">75% Preparation complete</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar-meta-help">
+                        <span class="tip-instruction"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Tip: Click any slot to schedule a session</span>
+                        <div class="calendar-legend">
+                            <span class="legend-item"><span class="legend-dot color-blue"></span> Class</span>
+                            <span class="legend-item"><span class="legend-dot color-green"></span> Study</span>
+                            <span class="legend-item"><span class="legend-dot color-red"></span> Exam</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 3: ADD STUDY SESSION FORM -->
+            <div id="add-session-view" class="view-panel">
+                <div class="form-container-card">
+                    <div class="form-header">
+                        <h1>Add Study Session</h1>
+                        <p>Plan your next focused learning block and stay on track.</p>
+                    </div>
+
+                    <form id="add-session-form" class="session-form">
+                        <div class="form-group">
+                            <label for="module-name">Module Name</label>
+                            <input type="text" id="module-name" required placeholder="e.g. Advanced Mathematics" aria-required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="task-description">Task Description</label>
+                            <textarea id="task-description" required rows="4" placeholder="What do you plan to achieve during this session?" aria-required="true"></textarea>
+                        </div>
+
+                        <div class="form-row-2col">
+                            <div class="form-group">
+                                <label for="session-date">Date</label>
+                                <input type="date" id="session-date" required aria-required="true">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="session-time">Start Time</label>
+                                <input type="time" id="session-time" required aria-required="true">
+                            </div>
+                        </div>
+
+                        <div class="form-group-checkbox">
+                            <input type="checkbox" id="notify-session">
+                            <label for="notify-session">Notify me before the session starts</label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="save-session-btn">Save Session</button>
+                            <button type="button" class="cancel-session-btn" id="cancel-session-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tip-card-footer">
+                    <div class="tip-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.673M12 3v1m6.364.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0012 18.75c-.304 0-.604-.082-.88-.24l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <div class="tip-text">
+                        <strong>Pro Tip</strong>: Research shows that breaking study sessions into 50-minute blocks with 10-minute breaks increases long-term retention. Use the session description to list exactly 3 objectives for this block.
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 6: STUDY GROUPS & CHAT -->
+            <div id="groups-view" class="view-panel">
+                <!-- Groups Main Panel -->
+                <div id="groups-list-container">
+                    <div class="groups-header-row">
+                        <div>
+                            <h1>Study Groups</h1>
+                            <p>Connect with peers and learn faster together.</p>
+                        </div>
+                        <button class="create-group-btn" id="open-create-group-modal-btn">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span>Create New Group</span>
+                        </button>
+                    </div>
+
+                    <div class="groups-cards-grid" id="groups-grid">
+                        <!-- Group cards generated dynamically by JavaScript -->
+                    </div>
+
+                    <!-- Groups Feature Footer -->
+                    <div class="groups-feature-footer">
+                        <div class="feature-footer-content">
+                            <h3>Learn better with StudySync Groups</h3>
+                            <p>Research shows that studying in groups can increase information retention by up to 40%. Join thousands of students already learning together.</p>
+                            <div class="feature-badges">
+                                <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Collaborative Notes</span>
+                                <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Group Quizzes</span>
+                                <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Live Chat</span>
+                            </div>
+                        </div>
+                        <div class="feature-footer-visual">
+                            <div class="visual-card-mock">
+                                <div class="mock-line long"></div>
+                                <div class="mock-line short"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Sub-view Overlay (Inside Study Groups target) -->
+                <div id="chat-room-container" class="chat-container-card hidden">
+                    <div class="chat-header">
+                        <button class="back-to-groups-btn" id="back-to-groups-btn" aria-label="Go back to groups list">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <div class="chat-group-details">
+                            <h2 id="chat-group-title">Java Programming Study Group</h2>
+                            <p class="chat-members-count"><span class="green-indicator-dot"></span> 12 active members online</p>
+                        </div>
+                        <button class="join-live-session-btn">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                            <span>Join Session</span>
+                        </button>
+                    </div>
+
+                    <!-- Chat Message Thread -->
+                    <div class="chat-thread" id="chat-messages-thread">
+                        <!-- Messages render here -->
+                    </div>
+
+                    <!-- Chat Input Panel -->
+                    <form id="chat-message-form" class="chat-input-area">
+                        <button type="button" class="chat-attach-btn" aria-label="Attach File">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                            </svg>
+                        </button>
+                        
+                        <input type="text" id="chat-message-input" placeholder="Write Message..." aria-label="Type message content" required>
+                        
+                        <div class="chat-input-controls">
+                            <button type="button" class="chat-emoji-btn" aria-label="Add Emoji">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                            </button>
+                            <button type="submit" class="chat-send-btn" aria-label="Send Message">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45)">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- VIEW 8: ACCESSIBILITY & SETTINGS -->
+            <div id="settings-view" class="view-panel">
+                <div class="settings-layout">
+                    <div class="settings-card main-settings">
+                        <h1>Accessibility & App Settings</h1>
+                        <p class="settings-subheader">Tailor the visual presentation and assistive controls of StudySync to match your needs.</p>
+
+                        <!-- Theme Contrast Modes -->
+                        <section class="settings-section">
+                            <h2>Contrast & Color Themes</h2>
+                            <p class="section-description">Select color palettes built with high contrast and optimal luminance ratios for readability.</p>
+                            <div class="settings-control-row flex-wrap" id="theme-controls">
+                                <button class="theme-option-btn active" data-theme="normal">
+                                    <span class="theme-preview-color theme-normal-preview"></span>
+                                    <span>Default Theme</span>
+                                </button>
+                                <button class="theme-option-btn" data-theme="high-contrast">
+                                    <span class="theme-preview-color theme-hc-preview"></span>
+                                    <span>High Contrast (Light)</span>
+                                </button>
+                                <button class="theme-option-btn" data-theme="dark-high-contrast">
+                                    <span class="theme-preview-color theme-dhc-preview"></span>
+                                    <span>High Contrast (Dark)</span>
+                                </button>
+                                <button class="theme-option-btn" data-theme="monochrome">
+                                    <span class="theme-preview-color theme-mono-preview"></span>
+                                    <span>Monochrome (Grayscale)</span>
+                                </button>
+                            </div>
+                        </section>
+
+                        <!-- Font Customizer Options -->
+                        <section class="settings-section font-adjustments">
+                            <h2>Typography & Readability</h2>
+                            <div class="grid-2col">
+                                <!-- Font Size Slider -->
+                                <div class="control-box">
+                                    <label for="font-size-slider" class="control-label">
+                                        <span>Font Size Scale</span>
+                                        <span id="font-size-value">Medium (100%)</span>
+                                    </label>
+                                    <div class="slider-wrapper">
+                                        <span class="slider-label-min">A</span>
+                                        <input type="range" id="font-size-slider" min="1" max="4" value="2" step="1" aria-valuemin="1" aria-valuemax="4" aria-valuenow="2" aria-valuetext="Medium (100%)">
+                                        <span class="slider-label-max">A</span>
+                                    </div>
+                                </div>
+
+                                <!-- Line Spacing Slider -->
+                                <div class="control-box">
+                                    <label for="line-spacing-select" class="control-label">Line Spacing</label>
+                                    <select id="line-spacing-select" class="custom-select">
+                                        <option value="normal">Normal (1.5)</option>
+                                        <option value="cozy">Cozy (1.75)</option>
+                                        <option value="spacious">Spacious (2.1)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div class="toggle-info">
+                                    <h3>Dyslexic-Friendly Font</h3>
+                                    <p>Changes the system typography to a weighted, distinct letter spacing layout built for readers with dyslexia.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox" id="dyslexic-font-toggle">
+                                    <span class="slider-switch-round"></span>
+                                </label>
+                            </div>
+                        </section>
+
+                        <!-- Assistive Tech Controls -->
+                        <section class="settings-section">
+                            <h2>Assistive Features</h2>
+                            
+                            <!-- TTS Option -->
+                            <div class="settings-toggle-row border-bottom">
+                                <div class="toggle-info">
+                                    <h3>Text-to-Speech Hover Reader</h3>
+                                    <p>Read any text snippet aloud automatically when you hover with your mouse or focus using the keyboard.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox" id="tts-reader-toggle">
+                                    <span class="slider-switch-round"></span>
+                                </label>
+                            </div>
+
+                            <!-- Reduced Motion -->
+                            <div class="settings-toggle-row">
+                                <div class="toggle-info">
+                                    <h3>Reduced Motion</h3>
+                                    <p>Disables animated transitions, sliding modals, and complex visual effects for high refresh stability.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox" id="reduced-motion-toggle">
+                                    <span class="slider-switch-round"></span>
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Keyboard navigation cheat sheet / instructions -->
+                    <div class="settings-card info-settings">
+                        <h2>Accessibility Helpers</h2>
+                        <div class="info-content-block">
+                            <h3>Keyboard Shortcuts (Alt + Key)</h3>
+                            <p>Quickly jump to any core page from anywhere in StudySync using custom global system hotkeys.</p>
+                            
+                            <table class="shortcuts-table">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Shortcut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Go to Dashboard</td>
+                                        <td><kbd>Alt</kbd> + <kbd>D</kbd></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Go to Calendar</td>
+                                        <td><kbd>Alt</kbd> + <kbd>C</kbd></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Go to Groups</td>
+                                        <td><kbd>Alt</kbd> + <kbd>G</kbd></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Go to Settings</td>
+                                        <td><kbd>Alt</kbd> + <kbd>S</kbd></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Add Study Session</td>
+                                        <td><kbd>Alt</kbd> + <kbd>A</kbd></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="info-content-block margin-top">
+                            <h3>Screen Reader Live Log</h3>
+                            <p>This panel simulates screen reader output, displaying what would be spoken to a blind student using assistive tools.</p>
+                            <div class="screen-reader-monitor" id="sr-monitor-box">
+                                <span class="monitor-timestamp">System ready</span>
+                                <span class="monitor-text">StudySync initialized. Welcome back, Siyabonga.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: ADD TASK OVERLAY -->
+    <div id="add-task-modal" class="modal-overlay hidden">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-task-title">
+            <div class="modal-header">
+                <h3 id="modal-task-title">Add Today's Task</h3>
+                <button class="close-modal-btn" id="close-task-modal-btn" aria-label="Close Task Modal">&times;</button>
+            </div>
+            <form id="add-task-form">
+                <div class="form-group">
+                    <label for="task-title-input">Task Title</label>
+                    <input type="text" id="task-title-input" required placeholder="e.g. Study Java Chapter 5" aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="task-desc-input">Description / Module</label>
+                    <input type="text" id="task-desc-input" required placeholder="e.g. Object Oriented Programming • 2 hours" aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priority / Deadline</label>
+                    <select id="task-priority" class="custom-select">
+                        <option value="HIGH">HIGH Priority</option>
+                        <option value="DUE TOMORROW">DUE TOMORROW</option>
+                        <option value="NORMAL">NORMAL Priority</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="save-session-btn">Add Task</button>
+                    <button type="button" class="cancel-session-btn" id="cancel-task-modal-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CREATE GROUP OVERLAY -->
+    <div id="create-group-modal" class="modal-overlay hidden">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-group-title">
+            <div class="modal-header">
+                <h3 id="modal-group-title">Create Study Group</h3>
+                <button class="close-modal-btn" id="close-group-modal-btn" aria-label="Close Group Modal">&times;</button>
+            </div>
+            <form id="create-group-form">
+                <div class="form-group">
+                    <label for="group-title-input">Group Name</label>
+                    <input type="text" id="group-title-input" required placeholder="e.g. Kotlin Developers Group" aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="group-desc-input">Description</label>
+                    <textarea id="group-desc-input" required rows="3" placeholder="e.g. Discuss mobile app design and Kotlin coding patterns" aria-required="true"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="group-type">Visibility</label>
+                    <select id="group-type" class="custom-select">
+                        <option value="ACTIVE">Active (Collaborative)</option>
+                        <option value="PUBLIC">Public (Open Discussions)</option>
+                        <option value="PRIVATE">Private (Invite Only)</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="save-session-btn">Create Group</button>
+                    <button type="button" class="cancel-session-btn" id="cancel-group-modal-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
